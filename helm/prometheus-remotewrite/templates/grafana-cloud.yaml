@@ -1,0 +1,25 @@
+apiVersion: monitoring.giantswarm.io/v1alpha1
+kind: RemoteWrite
+metadata:
+  name: grafana-cloud
+spec:
+  clusterSelector: {}
+  remoteWrite:
+    name: test
+    url: https://prometheus-us-central1.grafana.net/api/prom/push
+    basicAuth:
+      password:
+        key: password
+        name: remote-write
+      username:
+        key: username
+        name: remote-write
+    queueConfig:
+      capacity: 10000
+      maxSamplesPerSend: 1000
+      minShards: 10
+    writeRelabelConfigs:
+      - action: keep
+        regex: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
+        sourceLabels:
+          - __name__
