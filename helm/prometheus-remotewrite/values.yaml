@@ -1,6 +1,4 @@
-# TEMPLATE-APP: This is set as a reasonable default, feel free to change.
-
-name: {APP-NAME}
+name: prometheus-remotewrite
 serviceType: managed
 
 project:
@@ -9,6 +7,6 @@ project:
 
 image:
   registry: quay.io
-  name: giantswarm/{APP-NAME}
+  name: giantswarm/prometheus-remotewrite
   tag: v0.0.1
   pullPolicy: IfNotPresent
