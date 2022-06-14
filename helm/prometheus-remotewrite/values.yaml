@@ -5,4 +5,4 @@ remoteWrite:
   grafanaCloud:
     url: "https://some-prometheus.endpoint"
     username: ""
-    password: ""
+    apiKey: ""
