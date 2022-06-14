@@ -1,12 +1,8 @@
 name: prometheus-remotewrite
 serviceType: managed
 
-project:
-  branch: "[[ .Branch ]]"
-  commit: "[[ .SHA ]]"
-
-image:
-  registry: quay.io
-  name: giantswarm/prometheus-remotewrite
-  tag: v0.0.1
-  pullPolicy: IfNotPresent
+remoteWrite:
+  grafanaCloud:
+    url: "https://some-prometheus.endpoint"
+    username: ""
+    password: ""

@@ -2,18 +2,21 @@ apiVersion: monitoring.giantswarm.io/v1alpha1
 kind: RemoteWrite
 metadata:
   name: grafana-cloud
+  namespace: {{ include "namespace" . }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   clusterSelector: {}
   remoteWrite:
-    name: test
-    url: https://prometheus-us-central1.grafana.net/api/prom/push
+    name: grafana-cloud
+    url: {{ .Values.remoteWrite.grafanaCloud.url }}
     basicAuth:
-      password:
-        key: password
-        name: remote-write
       username:
         key: username
-        name: remote-write
+        name: grafana-cloud
+      password:
+        key: password
+        name: grafana-cloud
     queueConfig:
       capacity: 10000
       maxSamplesPerSend: 1000
