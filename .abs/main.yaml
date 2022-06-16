@@ -1,5 +1,5 @@
 replace-chart-version-with-git: true
-giantswarm-validator-ignored-checks: ['HasValuesSchema']
+giantswarm-validator-ignored-checks: HasValuesSchema
 generate-metadata: true
 chart-dir: ./helm/prometheus-remotewrite
 destination: ./build
