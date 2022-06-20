@@ -4,5 +4,5 @@ serviceType: managed
 remoteWrite:
   grafanaCloud:
     url: ""
-    username: "10755"
+    username: ""
     apiKey: ""
