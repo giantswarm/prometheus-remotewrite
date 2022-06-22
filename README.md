@@ -37,7 +37,7 @@ See the [full reference on how to configure apps](https://docs.giantswarm.io/app
 
 This application contains remote write resources which definition lives in [prometheus-meta-operator][prometheus-meta-operator]. This definition is based on the upstream [Prometheus.remoteWrite][prometheus remotewrite spec] definition. Details of definition and implementation can be found in the [roadmap][roadmap] issue.
 
-More details :
+More details about Prometheus remote write feature :
 
 - [prometheus remotewrite configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)
 - [prometheus remotewrite tuning](https://prometheus.io/docs/practices/remote_write/)
