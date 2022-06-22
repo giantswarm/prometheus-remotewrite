@@ -1,4 +1,5 @@
 replace-chart-version-with-git: true
+giantswarm-validator-ignored-checks: F0001
 generate-metadata: true
 chart-dir: ./helm/prometheus-remotewrite
 destination: ./build
