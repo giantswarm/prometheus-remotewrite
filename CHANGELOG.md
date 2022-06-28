@@ -10,5 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `grafana-cloud` remote write configuration.
+  Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/REPOSITORY_NAME/tree/main
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/tree/main
