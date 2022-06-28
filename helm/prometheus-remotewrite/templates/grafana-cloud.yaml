@@ -26,3 +26,8 @@ spec:
         regex: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
         sourceLabels:
           - __name__
+  secrets:
+    - name: grafana-cloud
+      data:
+        username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
+        password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
