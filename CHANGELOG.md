@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix `grafana-cloud` secret. No changes, just redeploying with fixed config, see https://github.com/giantswarm/config/pull/1325
+
 ## [0.1.0] - 2022-07-13
 
 ### Added
