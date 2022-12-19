@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Allow insecure skip verify on remote write.
+
 ## [0.1.2] - 2022-10-28
 
 ## [0.1.1] - 2022-10-20
