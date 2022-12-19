@@ -6,3 +6,4 @@ remoteWrite:
     url: ""
     username: ""
     apiKey: ""
+    insecureSkipVerify: false
