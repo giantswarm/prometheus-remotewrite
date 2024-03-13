@@ -1,3 +1,4 @@
+{{- if .Values.remoteWrite.enabled }}
 apiVersion: monitoring.giantswarm.io/v1alpha1
 kind: RemoteWrite
 metadata:
@@ -33,3 +34,4 @@ spec:
       data:
         username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
         password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
+{{- end -}}

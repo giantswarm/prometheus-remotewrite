@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Enable or disable the remoteWrite feature by setting the `enabled` property. We want to be able to disable this when mimir is deployed.
+
 ### Removed
 
 - Stop pushing to `openstack-app-collection`.
