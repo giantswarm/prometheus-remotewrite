@@ -1,4 +1,4 @@
-{{- if not .Values.remoteWrite.enabled }}
+{{- if .Values.remoteWrite.enabled }}
 apiVersion: monitoring.giantswarm.io/v1alpha1
 kind: RemoteWrite
 metadata:
