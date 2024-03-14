@@ -2,6 +2,17 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "mimir": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "prometheusVersion": {
+                    "type": "string"
+                }
+            }
+        },
         "name": {
             "type": "string"
         },

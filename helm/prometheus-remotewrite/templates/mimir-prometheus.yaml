@@ -1,0 +1,138 @@
+{{- if .Values.mimir.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-grafana-cloud-prometheus
+  namespace: mimir
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: node-role.kubernetes.io/control-plane
+            operator: DoesNotExist
+  evaluationInterval: 60s
+  image: gsoci.azurecr.io/giantswarm/prometheus:{{ .Values.mimir.prometheusVersion }}
+  podMetadata:
+    labels:
+      {{- include "labels.common" . | nindent 4 }}
+  priorityClassName: prometheus
+  prometheusExternalLabelName: ""
+  remoteRead:
+  - name: mimir
+    readRecent: true
+    remoteTimeout: 1m
+    url: http://mimir-gateway.mimir.svc/prometheus/api/v1/read
+    headers:
+      "X-Scope-OrgID": "anonymous"
+    filterExternalLabels: false
+  remoteWrite:
+  - basicAuth:
+      password:
+        key: password
+        name: mimir-grafana-cloud-prometheus
+      username:
+        key: username
+        name: mimir-grafana-cloud-prometheus
+    name: grafana-cloud
+    url: {{ .Values.remoteWrite.grafanaCloud.url }}
+    writeRelabelConfigs:
+    - action: keep
+      regex: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
+      sourceLabels:
+      - __name__
+  replicaExternalLabelName: ""
+  replicas: 1
+  resources:
+    limits:
+      cpu: 150m
+      memory: "1610612736"
+    requests:
+      cpu: 100m
+      memory: "1610612736"
+  retention: 1d
+  retentionSize: 40GiB
+  scrapeInterval: 60s
+  securityContext:
+    fsGroup: 2000
+    runAsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  podMonitorNamespaceSelector: null
+  podMonitorSelector: null
+  # This prometheus will run all rules deployed in the management cluster.
+  # We probably want to reduce that to grafana cloud data only or at least only recording rules.
+  ruleNamespaceSelector:
+      matchExpressions:
+      - key: kubernetes.io/metadata.name
+        operator: Exists
+  ruleSelector: {}
+  # If prometheus has no servicemonitor, podmonitor or probe selector, it will not render rules.
+  serviceMonitorNamespaceSelector:
+    matchExpressions:
+    - key: nonexistentkey
+      operator: Exists
+  serviceMonitorSelector:
+    matchExpressions:
+    - key: nonexistentkey
+      operator: Exists
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
+      status: {}
+  topologySpreadConstraints:
+  - labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: prometheus
+    maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+  version: {{ .Values.mimir.prometheusVersion }}
+  walCompression: true
+  web:
+    pageTitle: Mimir Grafana Cloud Prometheus
+---
+apiVersion: v1
+data:
+  password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
+  username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
+kind: Secret
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-grafana-cloud-prometheus
+  namespace: mimir
+type: Opaque
+---
+apiVersion: monitoring.giantswarm.io/v1alpha1
+kind: RemoteWrite
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-remote-write
+  namespace: mimir
+spec:
+  clusterSelector:
+    matchLabels:
+      # We do not want to override the remote write config for the mimir-grafana-cloud prometheus
+      app.kubernetes.io/managed-by: prometheus-meta-operator
+  remoteWrite:
+    name: mimir
+    queueConfig:
+      capacity: 10000
+      maxSamplesPerSend: 1000
+      minShards: 10
+    tlsConfig:
+      insecureSkipVerify: false
+    url: http://mimir-gateway.mimir.svc/api/v1/push
+{{- end }}

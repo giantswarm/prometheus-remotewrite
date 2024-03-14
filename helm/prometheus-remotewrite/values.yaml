@@ -1,9 +1,13 @@
 name: prometheus-remotewrite
 serviceType: managed
 
-remoteWrite:
-  enabled: true
+mimir:
+  enabled: false
+  # used by renovate
+  # repo: gsoci.azurecr.io/giantswarm/prometheus
+  prometheusVersion: "v2.50.1"
 
+remoteWrite:
   grafanaCloud:
     url: ""
     username: ""
