@@ -40,8 +40,8 @@ kind: PodMonitor
 metadata:
   labels:
   {{- include "labels.common" . | nindent 4 }}
-name: mimir-grafana-cloud-prometheus
-namespace: mimir
+  name: mimir-grafana-cloud-prometheus
+  namespace: mimir
 spec:
   namespaceSelector:
     matchNames:
@@ -127,23 +127,13 @@ spec:
     matchLabels:
       # We only target rules that needs to be sent do grafana cloud
       giantswarm.io/remote-write-target: grafana-cloud
-  # If prometheus has no servicemonitor, podmonitor or probe selector set, it will not render rules so we give it a fake one
-  serviceMonitorNamespaceSelector:
-    matchExpressions:
-    - key: nonexistentkey
-      operator: Exists
-  serviceMonitorSelector:
-    matchExpressions:
-    - key: nonexistentkey
-      operator: Exists
+  # We ensure it only selects the prometheus pod monitor in the mimir namespace
+  serviceMonitorNamespaceSelector: null
   podMonitorNamespaceSelector:
     matchExpressions:
-    - key: nonexistentkey
+    - key: kubernetes.io/metadata.name
       operator: Exists
-  podMonitorSelector:
-    matchExpressions:
-    - key: nonexistentkey
-      operator: Exists
+      value: "mimir"
   storage:
     volumeClaimTemplate:
       spec:
