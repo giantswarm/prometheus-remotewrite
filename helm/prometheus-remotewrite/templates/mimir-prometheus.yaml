@@ -36,6 +36,27 @@ metadata:
 type: Opaque
 ---
 apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+  {{- include "labels.common" . | nindent 4 }}
+name: mimir-grafana-cloud-prometheus
+namespace: mimir
+spec:
+  namespaceSelector:
+    matchNames:
+    - mimir
+  podMetricsEndpoints:
+  - port: "9090"
+    relabelings:
+    - action: replace
+      replacement: mimir
+      targetLabel: app
+  selector:
+    matchLabels:
+      prometheus: mimir-grafana-cloud-prometheus
+---
+apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   labels:
@@ -67,6 +88,9 @@ spec:
       regex: {{ .Values.remoteWrite.mimir.filteredMetrics }}
       sourceLabels:
       - __name__
+    - action: keep
+      regex: "mimir-grafana-cloud-prometheus"
+      sourceLabels: [prometheus]
   - basicAuth:
       password:
         key: password
