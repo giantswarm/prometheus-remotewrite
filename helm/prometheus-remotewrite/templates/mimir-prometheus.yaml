@@ -24,37 +24,35 @@ spec:
 ---
 ## This is the grafana cloud secret.
 apiVersion: v1
-data:
-  password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
-  username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
 kind: Secret
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
   name: mimir-grafana-cloud-prometheus
   namespace: mimir
+data:
+  password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
+  username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
 type: Opaque
 ---
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
+apiVersion: v1
+kind: ConfigMap
 metadata:
   labels:
-  {{- include "labels.common" . | nindent 4 }}
-  name: mimir-grafana-cloud-prometheus
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-grafana-cloud-prometheus-scrape-config
   namespace: mimir
-spec:
-  namespaceSelector:
-    matchNames:
-    - mimir
-  podMetricsEndpoints:
-  - port: "web"
-    relabelings:
-    - action: replace
-      replacement: mimir
-      targetLabel: app
-  selector:
-    matchLabels:
-      prometheus: mimir-grafana-cloud-prometheus
+data:
+  # We use a configmap because a podmonitor would require rbac
+  prometheus-additional.yaml: |
+    - job_name: prometheus
+      honor_labels: true
+      scheme: http
+      static_configs:
+        - targets: ['localhost:9090']
+      relabel_configs:
+      - replacement: mimir
+        target_label: app
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
@@ -64,6 +62,9 @@ metadata:
   name: mimir-grafana-cloud-prometheus
   namespace: mimir
 spec:
+  additionalScrapeConfigs:
+    name: mimir-grafana-cloud-prometheus-scrape-config
+    key: prometheus-additional.yaml
   evaluationInterval: 60s
   image: gsoci.azurecr.io/giantswarm/prometheus:{{ .Values.remoteWrite.mimir.prometheus.version }}
   podMetadata:
