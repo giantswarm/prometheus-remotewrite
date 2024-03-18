@@ -1,5 +1,5 @@
 {{- if .Values.remoteWrite.mimir.enabled }}
-## This is the remote write configuration for the old Prometheus on the MC that still scrapes some targets and receive data from the prometheus agents.
+## This is the remote write configuration for all the old Prometheis on the MC that still scrape some targets and receive data from the prometheus agents.
 ## Using the RemoteWrite CR with the label selector `app.kubernetes.io/managed-by=prometheus-meta-operator` then we ensure only the prometheus created by PMO send data to Mimir.
 apiVersion: monitoring.giantswarm.io/v1alpha1
 kind: RemoteWrite
