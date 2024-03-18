@@ -71,7 +71,10 @@ spec:
       matchExpressions:
       - key: kubernetes.io/metadata.name
         operator: Exists
-  ruleSelector: {}
+  ruleSelector:
+    matchLabels:
+      # This label was added here https://github.com/giantswarm/prometheus-rules/pull/1083 for this specific purpose
+      giantswarm.io/remote-write-target: grafana-cloud
   # If prometheus has no servicemonitor, podmonitor or probe selector, it will not render rules.
   serviceMonitorNamespaceSelector:
     matchExpressions:
