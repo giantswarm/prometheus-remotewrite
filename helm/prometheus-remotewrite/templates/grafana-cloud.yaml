@@ -27,7 +27,7 @@ spec:
       minShards: 10
     writeRelabelConfigs:
       - action: keep
-        regex: {{ .Values.remoteWrite.grafanaCloud.filteredMetrics }}
+        regex: {{ .Values.remoteWrite.grafanaCloud.metricsSelector }}
         sourceLabels:
           - __name__
   secrets:

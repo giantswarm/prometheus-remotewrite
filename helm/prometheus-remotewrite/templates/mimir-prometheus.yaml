@@ -47,7 +47,7 @@ spec:
     matchNames:
     - mimir
   podMetricsEndpoints:
-  - port: "9090"
+  - port: "web"
     relabelings:
     - action: replace
       replacement: mimir
@@ -85,7 +85,7 @@ spec:
     url: {{ .Values.remoteWrite.mimir.pushUrl }}
     writeRelabelConfigs:
     - action: keep
-      regex: {{ .Values.remoteWrite.mimir.filteredMetrics }}
+      regex: {{ .Values.remoteWrite.mimir.metricsSelector }}
       sourceLabels:
       - __name__
     - action: keep
@@ -102,7 +102,7 @@ spec:
     url: {{ .Values.remoteWrite.grafanaCloud.url }}
     writeRelabelConfigs:
     - action: keep
-      regex: {{ .Values.remoteWrite.grafanaCloud.filteredMetrics }}
+      regex: {{ .Values.remoteWrite.grafanaCloud.metricsSelector }}
       sourceLabels:
       - __name__
   replicaExternalLabelName: ""
@@ -128,12 +128,10 @@ spec:
       # We only target rules that needs to be sent do grafana cloud
       giantswarm.io/remote-write-target: grafana-cloud
   # We ensure it only selects the prometheus pod monitor in the mimir namespace
-  serviceMonitorNamespaceSelector: null
+  podMonitorSelector: {}
   podMonitorNamespaceSelector:
-    matchExpressions:
-    - key: kubernetes.io/metadata.name
-      operator: Exists
-      value: "mimir"
+    matchLabels:
+      kubernetes.io/metadata.name: mimir
   storage:
     volumeClaimTemplate:
       spec:

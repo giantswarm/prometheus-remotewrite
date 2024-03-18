@@ -25,7 +25,7 @@
                         "apiKey": {
                             "type": "string"
                         },
-                        "filteredMetrics": {
+                        "metricsSelector": {
                             "type": "string"
                         },
                         "insecureSkipVerify": {
@@ -45,7 +45,7 @@
                         "enabled": {
                             "type": "boolean"
                         },
-                        "filteredMetrics": {
+                        "metricsSelector": {
                             "type": "string"
                         },
                         "prometheus": {

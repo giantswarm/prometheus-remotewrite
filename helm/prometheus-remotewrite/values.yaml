@@ -5,7 +5,7 @@ remoteWrite:
   mimir:
     enabled: false
     # We want to only keep the prometheus metrics to have `prometheus_remote_storage_samples_total`
-    filteredMetrics: (^prometheus_.+)
+    metricsSelector: (^prometheus_.+)
     # used by renovate
     # repo: gsoci.azurecr.io/giantswarm/prometheus
     prometheus:
@@ -24,4 +24,4 @@ remoteWrite:
     username: ""
     apiKey: ""
     insecureSkipVerify: false
-    filteredMetrics: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
+    metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
