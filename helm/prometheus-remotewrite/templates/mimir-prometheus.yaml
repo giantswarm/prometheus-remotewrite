@@ -28,7 +28,7 @@ kind: Secret
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: mimir-grafana-cloud-prometheus
+  name: grafana-cloud
   namespace: mimir
 data:
   password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
@@ -36,34 +36,33 @@ data:
 type: Opaque
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: mimir-grafana-cloud-prometheus-scrape-config
+  name: additional-scrape-config
   namespace: mimir
 data:
-  # We use a configmap because a podmonitor would require rbac
-  prometheus-additional.yaml: |
-    - job_name: prometheus
-      honor_labels: true
-      scheme: http
-      static_configs:
-        - targets: ['localhost:9090']
-      relabel_configs:
-      - replacement: mimir
-        target_label: app
+  # We use an additional scrape config because a podmonitor would require rbac to list pods. The content is the following:
+  # - job_name: mimir-to-grafana-cloud
+  #   static_configs:
+  #   - targets: ['localhost:9090']
+  #   relabel_configs:
+  #   - replacement: mimir
+  #     target_label: app
+  prometheus-additional.yaml: LSBqb2JfbmFtZTogbWltaXItdG8tZ3JhZmFuYS1jbG91ZAogIHN0YXRpY19jb25maWdzOgogIC0gdGFyZ2V0czogWydsb2NhbGhvc3Q6OTA5MCddCiAgcmVsYWJlbF9jb25maWdzOgogIC0gcmVwbGFjZW1lbnQ6IG1pbWlyCiAgICB0YXJnZXRfbGFiZWw6IGFwcAo=
+type: Opaque
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: mimir-grafana-cloud-prometheus
+  name: mimir-to-grafana-cloud
   namespace: mimir
 spec:
   additionalScrapeConfigs:
-    name: mimir-grafana-cloud-prometheus-scrape-config
+    name: additional-scrape-config
     key: prometheus-additional.yaml
   evaluationInterval: 60s
   image: gsoci.azurecr.io/giantswarm/prometheus:{{ .Values.remoteWrite.mimir.prometheus.version }}
@@ -90,15 +89,15 @@ spec:
       sourceLabels:
       - __name__
     - action: keep
-      regex: "mimir-grafana-cloud-prometheus"
-      sourceLabels: [prometheus]
+      regex: "mimir-to-grafana-cloud"
+      sourceLabels: [job]
   - basicAuth:
       password:
         key: password
-        name: mimir-grafana-cloud-prometheus
+        name: grafana-cloud
       username:
         key: username
-        name: mimir-grafana-cloud-prometheus
+        name: grafana-cloud
     name: grafana-cloud
     url: {{ .Values.remoteWrite.grafanaCloud.url }}
     writeRelabelConfigs:
@@ -128,8 +127,11 @@ spec:
     matchLabels:
       # We only target rules that needs to be sent do grafana cloud
       giantswarm.io/remote-write-target: grafana-cloud
-  # We ensure it only selects the prometheus pod monitor in the mimir namespace
-  podMonitorSelector: {}
+  # Without any podmonitor or servicemonitor set, then the prometheus would not evaluate rules
+  podMonitorSelector:
+    matchExpressions:
+    - key: nonexistentkey
+      operator: Exists
   podMonitorNamespaceSelector:
     matchLabels:
       kubernetes.io/metadata.name: mimir
@@ -152,5 +154,5 @@ spec:
   version: {{ .Values.remoteWrite.mimir.prometheus.version }}
   walCompression: true
   web:
-    pageTitle: Mimir Grafana Cloud Prometheus
+    pageTitle: Mimir To Grafana Cloud Prometheus
 {{- end }}
