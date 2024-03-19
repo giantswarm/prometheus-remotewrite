@@ -1,0 +1,147 @@
+{{- if .Values.remoteWrite.mimir.enabled }}
+## This is the remote write configuration for all the old Prometheis on the MC that still scrape some targets and receive data from the prometheus agents.
+## Using the RemoteWrite CR with the label selector `app.kubernetes.io/managed-by=prometheus-meta-operator` then we ensure only the prometheus created by PMO send data to Mimir.
+apiVersion: monitoring.giantswarm.io/v1alpha1
+kind: RemoteWrite
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-remote-write
+  namespace: mimir
+spec:
+  clusterSelector:
+    matchLabels:
+      app.kubernetes.io/managed-by: prometheus-meta-operator
+  remoteWrite:
+    name: mimir
+    queueConfig:
+      capacity: 10000
+      maxSamplesPerSend: 1000
+      minShards: 10
+    tlsConfig:
+      insecureSkipVerify: false
+    url: {{ .Values.remoteWrite.mimir.pushUrl }}
+---
+## This is the grafana cloud secret.
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: grafana-cloud
+  namespace: mimir
+data:
+  password: {{ .Values.remoteWrite.grafanaCloud.apiKey | b64enc }}
+  username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
+type: Opaque
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-to-grafana-cloud
+  namespace: mimir
+spec:
+  namespaceSelector:
+    matchNames:
+    - mimir
+  podMetricsEndpoints:
+  - port: "web"
+    relabelings:
+    - action: replace
+      replacement: mimir
+      targetLabel: app
+  selector:
+    matchLabels:
+      prometheus: mimir-to-grafana-cloud
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-to-grafana-cloud
+  namespace: mimir
+spec:
+  evaluationInterval: 60s
+  image: gsoci.azurecr.io/giantswarm/prometheus:{{ .Values.remoteWrite.mimir.prometheus.version }}
+  podMetadata:
+    labels:
+      {{- include "labels.common" . | nindent 4 }}
+  priorityClassName: prometheus
+  prometheusExternalLabelName: ""
+  remoteRead:
+  - name: mimir
+    readRecent: true
+    remoteTimeout: 1m
+    url: {{ .Values.remoteWrite.mimir.readUrl }}
+    headers:
+      "X-Scope-OrgID": "anonymous"
+    filterExternalLabels: false
+  remoteWrite:
+  - basicAuth:
+      password:
+        key: password
+        name: grafana-cloud
+      username:
+        key: username
+        name: grafana-cloud
+    name: grafana-cloud
+    url: {{ .Values.remoteWrite.grafanaCloud.url }}
+    writeRelabelConfigs:
+    - action: keep
+      regex: {{ .Values.remoteWrite.grafanaCloud.metricsSelector }}
+      sourceLabels:
+      - __name__
+  replicaExternalLabelName: ""
+  replicas: 1
+  resources:
+    {{- toYaml .Values.remoteWrite.mimir.prometheus.resources | nindent 4 }}
+  retention: 1d
+  retentionSize: 40GiB
+  scrapeInterval: 60s
+  securityContext:
+    fsGroup: 2000
+    runAsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  ruleNamespaceSelector:
+    matchExpressions:
+    - key: kubernetes.io/metadata.name
+      operator: Exists
+  ruleSelector:
+    matchLabels:
+      # We only target rules that needs to be sent do grafana cloud
+      giantswarm.io/remote-write-target: grafana-cloud
+  # Without any podmonitor or servicemonitor set, then the prometheus would not evaluate rules
+  podMonitorSelector:
+    matchExpressions:
+    - key: nonexistentkey
+      operator: Exists
+  podMonitorNamespaceSelector:
+    matchExpressions:
+    - key: nonexistentkey
+      operator: Exists
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
+  topologySpreadConstraints:
+  - labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: prometheus
+    maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+  version: {{ .Values.remoteWrite.mimir.prometheus.version }}
+  walCompression: true
+  web:
+    pageTitle: Mimir To Grafana Cloud Prometheus
+{{- end }}

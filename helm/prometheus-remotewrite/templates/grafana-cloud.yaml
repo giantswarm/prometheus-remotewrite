@@ -1,12 +1,13 @@
-{{- if .Values.remoteWrite.enabled }}
+{{- if not .Values.remoteWrite.mimir.enabled }}
 apiVersion: monitoring.giantswarm.io/v1alpha1
 kind: RemoteWrite
 metadata:
   name: grafana-cloud
-  namespace: {{ include "namespace" . }}
+  namespace: monitoring
   labels:
     {{- include "labels.common" . | nindent 4 }}
 spec:
+  # We select all Prometheus on the management cluster. We do not select prometheus-agents (configured in PMO).
   clusterSelector: {}
   remoteWrite:
     name: grafana-cloud
@@ -26,7 +27,7 @@ spec:
       minShards: 10
     writeRelabelConfigs:
       - action: keep
-        regex: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
+        regex: {{ .Values.remoteWrite.grafanaCloud.metricsSelector }}
         sourceLabels:
           - __name__
   secrets:

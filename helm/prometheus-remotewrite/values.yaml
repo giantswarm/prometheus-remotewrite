@@ -2,10 +2,26 @@ name: prometheus-remotewrite
 serviceType: managed
 
 remoteWrite:
-  enabled: true
-
+  mimir:
+    enabled: false
+    # We want to only keep the prometheus metrics to have `prometheus_remote_storage_samples_total`
+    metricsSelector: (^prometheus_.+)
+    # used by renovate
+    # repo: gsoci.azurecr.io/giantswarm/prometheus
+    prometheus:
+      resources:
+        limits:
+          cpu: 150m
+          memory: "1610612736"
+        requests:
+          cpu: 100m
+          memory: "1610612736"
+      version: "v2.50.1"
+    pushUrl: http://mimir-gateway.mimir.svc/api/v1/push
+    readUrl: http://mimir-gateway.mimir.svc/prometheus/api/v1/read
   grafanaCloud:
     url: ""
     username: ""
     apiKey: ""
     insecureSkipVerify: false
+    metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
