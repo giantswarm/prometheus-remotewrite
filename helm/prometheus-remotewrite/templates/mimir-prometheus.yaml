@@ -35,23 +35,26 @@ data:
   username: {{ .Values.remoteWrite.grafanaCloud.username | b64enc }}
 type: Opaque
 ---
-apiVersion: v1
-kind: Secret
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
 metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
-  name: additional-scrape-config
+  name: mimir-to-grafana-cloud
   namespace: mimir
-data:
-  # We use an additional scrape config because a podmonitor would require rbac to list pods. The content is the following:
-  # - job_name: mimir-to-grafana-cloud
-  #   static_configs:
-  #   - targets: ['localhost:9090']
-  #   relabel_configs:
-  #   - replacement: mimir
-  #     target_label: app
-  prometheus-additional.yaml: LSBqb2JfbmFtZTogbWltaXItdG8tZ3JhZmFuYS1jbG91ZAogIHN0YXRpY19jb25maWdzOgogIC0gdGFyZ2V0czogWydsb2NhbGhvc3Q6OTA5MCddCiAgcmVsYWJlbF9jb25maWdzOgogIC0gcmVwbGFjZW1lbnQ6IG1pbWlyCiAgICB0YXJnZXRfbGFiZWw6IGFwcAo=
-type: Opaque
+spec:
+  namespaceSelector:
+    matchNames:
+    - mimir
+  podMetricsEndpoints:
+  - port: "web"
+    relabelings:
+    - action: replace
+      replacement: mimir
+      targetLabel: app
+  selector:
+    matchLabels:
+      prometheus: mimir-to-grafana-cloud
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
@@ -61,9 +64,6 @@ metadata:
   name: mimir-to-grafana-cloud
   namespace: mimir
 spec:
-  additionalScrapeConfigs:
-    name: additional-scrape-config
-    key: prometheus-additional.yaml
   evaluationInterval: 60s
   image: gsoci.azurecr.io/giantswarm/prometheus:{{ .Values.remoteWrite.mimir.prometheus.version }}
   podMetadata:
@@ -80,17 +80,6 @@ spec:
       "X-Scope-OrgID": "anonymous"
     filterExternalLabels: false
   remoteWrite:
-  # We push metrics to mimir about this prometheus
-  - name: mimir
-    url: {{ .Values.remoteWrite.mimir.pushUrl }}
-    writeRelabelConfigs:
-    - action: keep
-      regex: {{ .Values.remoteWrite.mimir.metricsSelector }}
-      sourceLabels:
-      - __name__
-    - action: keep
-      regex: "mimir-to-grafana-cloud"
-      sourceLabels: [job]
   - basicAuth:
       password:
         key: password
@@ -120,9 +109,9 @@ spec:
     seccompProfile:
       type: RuntimeDefault
   ruleNamespaceSelector:
-      matchExpressions:
-      - key: kubernetes.io/metadata.name
-        operator: Exists
+    matchExpressions:
+    - key: kubernetes.io/metadata.name
+      operator: Exists
   ruleSelector:
     matchLabels:
       # We only target rules that needs to be sent do grafana cloud
@@ -133,8 +122,9 @@ spec:
     - key: nonexistentkey
       operator: Exists
   podMonitorNamespaceSelector:
-    matchLabels:
-      kubernetes.io/metadata.name: mimir
+    matchExpressions:
+    - key: nonexistentkey
+      operator: Exists
   storage:
     volumeClaimTemplate:
       spec:
@@ -143,7 +133,6 @@ spec:
         resources:
           requests:
             storage: 50Gi
-      status: {}
   topologySpreadConstraints:
   - labelSelector:
       matchLabels:
