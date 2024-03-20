@@ -33,6 +33,16 @@ https://github.com/giantswarm/config/blob/main/installations/gauss/apps/promethe
 
 See the [full reference on how to configure apps](https://docs.giantswarm.io/app-platform/app-configuration/) for more details.
 
+## Mimir integration
+
+When Mimir is enabled as an observability component in the management cluster, we need to deploy resources like RemoteWrite, Prometheus in order to send data to `Grafana Cloud`.
+
+- Mimir RemoteWrite to send data from Prometheis (MC+WCs) to Mimir
+- Prometheus (mimir-to-grafana-cloud) to send data from Mimir to Grafana-Cloud
+
+Below, a graph explaining the architecture:
+![RemoteWrite architecture](/remotewrite-architecture.png "RemoteWrite architecture").
+
 ## Architecture
 
 This application contains remote write resources which definition lives in [prometheus-meta-operator][prometheus-meta-operator]. This definition is based on the upstream [Prometheus.remoteWrite][prometheus remotewrite spec] definition. Details of definition and implementation can be found in the [roadmap][roadmap] issue.
