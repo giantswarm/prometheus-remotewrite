@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2024-03-20
+
 ### Changed
 
 - Enable remote write from existing Prometheus to Mimir and from Mimir to grafana cloud using a Prometheus instance in-between to read data from Mimir and send data to Grafana Cloud until https://github.com/grafana/mimir/pull/4575 gets merged.
@@ -43,7 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.1...v0.1.2
