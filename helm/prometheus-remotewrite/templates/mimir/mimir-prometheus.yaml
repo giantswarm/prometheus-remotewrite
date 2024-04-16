@@ -108,6 +108,7 @@ spec:
     runAsUser: 1000
     seccompProfile:
       type: RuntimeDefault
+  shards: 1
   ruleNamespaceSelector:
     matchExpressions:
     - key: kubernetes.io/metadata.name

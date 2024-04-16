@@ -10,11 +10,11 @@ spec:
     - containerName: prometheus
       controlledValues: RequestsAndLimits
       minAllowed:
-        cpu: {{ .Values.prometheus.vpa.mimir.minAllowed.cpu }}
-        memory: {{ .Values.prometheus.vpa.mimir.minAllowed.memory }}
+        cpu: {{ .Values.remoteWrite.mimir.prometheus.vpa.minAllowed.cpu }}
+        memory: {{ .Values.remoteWrite.mimir.prometheus.vpa.minAllowed.memory }}
       maxAllowed:
-        cpu: {{ .Values.prometheus.vpa.mimir.maxAllowed.cpu }}
-        memory: {{ .Values.prometheus.vpa.mimir.maxAllowed.memory }}
+        cpu: {{ .Values.remoteWrite.mimir.prometheus.vpa.maxAllowed.cpu }}
+        memory: {{ .Values.remoteWrite.mimir.prometheus.vpa.maxAllowed.memory }}
       mode: Auto
   targetRef:
     apiVersion: monitoring.coreos.com/v1
