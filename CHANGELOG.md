@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2024-04-16
 
+## [0.2.2] - 2024-04-16
+
 ### Fixed
 
 - Fix `mimir-pometheus` vpa by adding labels and disabling it by default.
@@ -58,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
 [Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.2...v0.2.2
 [0.2.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.4...v0.2.0
