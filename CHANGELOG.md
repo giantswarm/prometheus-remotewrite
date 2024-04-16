@@ -9,8 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] - 2024-04-16
 
-## [0.2.2] - 2024-04-16
-
 ### Fixed
 
 - Fix `mimir-pometheus` vpa by adding labels and disabling it by default.
