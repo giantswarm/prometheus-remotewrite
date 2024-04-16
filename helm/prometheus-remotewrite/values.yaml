@@ -19,6 +19,14 @@ remoteWrite:
       version: "v2.50.1"
     pushUrl: http://mimir-gateway.mimir.svc/api/v1/push
     readUrl: http://mimir-gateway.mimir.svc/prometheus/api/v1/read
+    vpa:
+      enabled: true
+      maxAllowed:
+        cpu: 2
+        memory: 5Gi
+      minAllowed:
+        cpu: 200m
+        memory: 1Gi
   grafanaCloud:
     url: ""
     username: ""

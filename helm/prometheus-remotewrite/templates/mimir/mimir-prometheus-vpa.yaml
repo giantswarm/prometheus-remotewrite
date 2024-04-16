@@ -1,0 +1,25 @@
+{{- if .Values.prometheus.vpa.enabled }}
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: prometheus-mimir-to-grafana-cloud
+  namespace: mimir
+spec:
+  resourcePolicy:
+    containerPolicies:
+    - containerName: prometheus
+      controlledValues: RequestsAndLimits
+      minAllowed:
+        cpu: {{ .Values.prometheus.vpa.mimir.minAllowed.cpu }}
+        memory: {{ .Values.prometheus.vpa.mimir.minAllowed.memory }}
+      maxAllowed:
+        cpu: {{ .Values.prometheus.vpa.mimir.maxAllowed.cpu }}
+        memory: {{ .Values.prometheus.vpa.mimir.maxAllowed.memory }}
+      mode: Auto
+  targetRef:
+    apiVersion: monitoring.coreos.com/v1
+    kind: Prometheus
+    name: mimir-to-grafana-cloud
+  updatePolicy:
+    updateMode: Auto
+{{- end }}
