@@ -18,7 +18,6 @@ remoteWrite:
           memory: "1610612736"
       version: "v2.50.1"
       vpa:
-        enabled: true
         maxAllowed:
           cpu: 2
           memory: 5Gi
