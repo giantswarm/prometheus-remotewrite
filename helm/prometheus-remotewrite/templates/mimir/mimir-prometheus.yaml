@@ -68,7 +68,7 @@ spec:
   image: gsoci.azurecr.io/giantswarm/prometheus:{{ .Values.remoteWrite.mimir.prometheus.version }}
   podMetadata:
     labels:
-      {{- include "labels.common" . | nindent 4 }}
+      {{- include "labels.common" . | nindent 6 }}
   priorityClassName: prometheus
   prometheusExternalLabelName: ""
   remoteRead:
