@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2024-06-27
+
 ### Fixed
 
 - Fix `spec.podMetadata` indentation in `mimir-to-grafana-cloud` Prometheus CR.
@@ -61,7 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.1.4...v0.2.0
