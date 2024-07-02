@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Enable `proxyFromEnvironment` property in the `RemoteWrite` of the `mimir-to-grafana-cloud` PrometheusCR.
+
 ## [0.2.3] - 2024-06-27
 
 ### Fixed
