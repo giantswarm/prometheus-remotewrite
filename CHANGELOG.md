@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Send sloth recording rules to Grafana Cloud https://github.com/giantswarm/giantswarm/issues/31098.
 
 ### Changed
 
 - Clean up some things we do not need with mimir.
+- Bump Prometheus version from `2.50.1` to `2.54.1`.
 
 ## [0.2.3] - 2024-06-27
 

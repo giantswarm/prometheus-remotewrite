@@ -14,7 +14,7 @@ remoteWrite:
           memory: "1610612736"
       # used by renovate
       # repo: gsoci.azurecr.io/giantswarm/prometheus
-      version: "v2.50.1"
+      version: "v2.54.1"
       vpa:
         maxAllowed:
           cpu: 2
@@ -29,4 +29,4 @@ remoteWrite:
     username: ""
     apiKey: ""
     insecureSkipVerify: false
-    metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
+    metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+|^slo:.+)
