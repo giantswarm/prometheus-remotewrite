@@ -1,0 +1,8 @@
+global:
+  podSecurityStandards:
+    enforced: true
+remoteWrite:
+  grafanaCloud:
+    url: https://prometheus-us-central1.grafana.net/api/prom/push
+  mimir:
+    enabled: true
