@@ -30,7 +30,6 @@ def test_api_working(kube_cluster: Cluster) -> None:
 # if you want to assert this multiple times
 # -- Checking that mimir's statefulset is present on the cluster
 @pytest.fixture(scope="module")
-@pytest.mark.flaky(reruns=5, reruns_delay=10)
 def components(kube_cluster: Cluster) -> List[pykube.StatefulSet]:
     logger.info("Waiting for components to be deployed..")
 
