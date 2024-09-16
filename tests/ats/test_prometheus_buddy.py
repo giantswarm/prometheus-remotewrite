@@ -32,11 +32,11 @@ def test_api_working(kube_cluster: Cluster) -> None:
 @pytest.fixture(scope="module")
 @pytest.mark.flaky(reruns=5, reruns_delay=10)
 def components(kube_cluster: Cluster) -> List[pykube.StatefulSet]:
-    logger.info("Waiting for loki components to be deployed..")
+    logger.info("Waiting for components to be deployed..")
 
     components_ready = wait_for_components(kube_cluster)
 
-    logger.info("loki components are deployed..")
+    logger.info("components are deployed..")
 
     return components_ready
 
