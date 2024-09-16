@@ -29,4 +29,4 @@ remoteWrite:
     username: ""
     apiKey: ""
     insecureSkipVerify: false
-    metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|^slo_.+)
+    metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total|slo_target|slo_burnrate_high|slo_burnrate_low|slo_requests|slo_errors|slo_errors_per_request:ratio_rate5m|slo_threshold_high|slo_threshold_low)
