@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.2] - 2024-09-16
 
+### Removed
+
+- Remove some legacy slo metrics we do not need (slo_errors_per_request:ratio_ratexxx that are not 5m).
+
 ## [0.3.1] - 2024-09-04
 
 ### Removed
