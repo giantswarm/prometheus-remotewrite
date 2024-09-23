@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2024-09-23
+
 ### Changed
 
 - Enable `proxyFromEnvironment` property in the `RemoteWrite` of the `mimir-to-grafana-cloud` PrometheusCR.
@@ -90,7 +92,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.3...v0.3.0
