@@ -65,6 +65,7 @@ spec:
         key: username
         name: grafana-cloud
     name: grafana-cloud
+    proxyFromEnvironment: true
     url: {{ .Values.remoteWrite.grafanaCloud.url }}
     writeRelabelConfigs:
     - action: keep
