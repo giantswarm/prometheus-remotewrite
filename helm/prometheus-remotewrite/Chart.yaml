@@ -8,3 +8,9 @@ version: 0.3.2
 annotations:
   application.giantswarm.io/team: "atlas"
   config.giantswarm.io/version: 1.x.x
+dependencies:
+  - name: kube-prometheus-stack
+    alias: kubePrometheusStack
+    version: 11.0.0
+    repository: https://giantswarm.github.io/default-catalog/
+    condition: kubePrometheusStack.enabled

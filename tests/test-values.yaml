@@ -6,3 +6,28 @@ remoteWrite:
     url: https://prometheus-us-central1.grafana.net/api/prom/push
   mimir:
     enabled: true
+# The prometheus operator is needed for the Prometheus CR to generate a statefulset
+kubePrometheusStack:
+  enabled: true
+  crds:
+    enabled: false
+  alertmanager:
+    enabled: false
+  coreDns:
+    enabled: false
+  grafana:
+    enabled: false
+  kubeApiServer:
+    enabled: false
+  kubelet:
+    enabled: false
+  kubeControllerManager:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kube-state-metrics:
+    enabled: false
