@@ -6,6 +6,8 @@ remoteWrite:
     url: https://prometheus-us-central1.grafana.net/api/prom/push
   mimir:
     enabled: true
+    prometheus:
+      priorityClassName: ""
 # The prometheus operator is needed for the Prometheus CR to generate a statefulset
 kubePrometheusStack:
   enabled: true

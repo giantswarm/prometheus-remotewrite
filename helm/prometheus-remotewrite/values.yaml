@@ -5,6 +5,7 @@ remoteWrite:
   mimir:
     enabled: false
     prometheus:
+      priorityClassName: prometheus
       resources:
         limits:
           cpu: 150m
