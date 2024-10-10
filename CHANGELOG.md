@@ -12,6 +12,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add helm chart templating test in ci pipeline.
 - Add tests with ats in ci pipeline.
 
+## [0.5.0] - 2024-10-09
+
+### Removed
+
+- Remove legacy in-house slo framework.
+
+## [0.4.0] - 2024-09-23
+
+### Changed
+
+- Enable `proxyFromEnvironment` property in the `RemoteWrite` of the `mimir-to-grafana-cloud` PrometheusCR.
+
 ## [0.3.2] - 2024-09-16
 
 ### Removed
@@ -91,7 +103,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.2.3...v0.3.0
