@@ -20,9 +20,8 @@ workflows:
       - template-chart:
           name: "template-chart-test"
           filters:
-            branches:
-              ignore:
-                - main
+            tags:
+              only: /^v.*/
 
       - architect/push-to-app-catalog:
           name: app-catalog
@@ -33,6 +32,8 @@ workflows:
           chart: prometheus-remotewrite
           ct_config: ".circleci/ct-config.yml"
           persist_chart_archive: true
+          requires:
+            - "template-chart-test"
           filters:
             tags:
               only: /^v.*/
