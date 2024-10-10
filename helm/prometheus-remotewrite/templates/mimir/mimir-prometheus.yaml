@@ -46,7 +46,9 @@ spec:
   podMetadata:
     labels:
       {{- include "labels.common" . | nindent 6 }}
-  priorityClassName: prometheus
+  {{- if .Values.remoteWrite.mimir.prometheus.priorityClassName }}
+  priorityClassName: {{ .Values.remoteWrite.mimir.prometheus.priorityClassName }}
+  {{- end }}
   prometheusExternalLabelName: ""
   remoteRead:
   - name: mimir

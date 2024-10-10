@@ -5,6 +5,7 @@ remoteWrite:
   mimir:
     enabled: false
     prometheus:
+      priorityClassName: prometheus
       resources:
         limits:
           cpu: 150m
@@ -30,3 +31,6 @@ remoteWrite:
     apiKey: ""
     insecureSkipVerify: false
     metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total)
+
+kubePrometheusStack:
+  enabled: false
