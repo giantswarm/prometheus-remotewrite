@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bumped kube-prometheus-stack to v14.0.0
+
 ## [0.7.0] - 2025-02-04
 
 ### Added
