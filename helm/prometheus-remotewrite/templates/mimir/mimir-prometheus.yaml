@@ -56,7 +56,7 @@ spec:
     remoteTimeout: 1m
     url: {{ .Values.remoteWrite.mimir.readUrl }}
     headers:
-      "X-Scope-OrgID": {{ .Values.remoteWrite.mimir.tenant }}
+      "X-Scope-OrgID": {{ .Values.remoteWrite.mimir.tenant | quote }}
     filterExternalLabels: false
   remoteWrite:
   - basicAuth:
