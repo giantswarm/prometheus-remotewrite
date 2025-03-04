@@ -25,6 +25,7 @@ remoteWrite:
           memory: 1Gi
     pushUrl: http://mimir-gateway.mimir.svc/api/v1/push
     readUrl: http://mimir-gateway.mimir.svc/prometheus/api/v1/read
+    tenant: "anonymous"
   grafanaCloud:
     url: ""
     username: ""
