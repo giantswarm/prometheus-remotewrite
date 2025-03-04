@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- extract RemoteRead tenant to helm values to be able to override it.
+- Extract RemoteRead tenant to helm values to be able to override it.
 
 ## [0.7.1] - 2025-02-26
 
