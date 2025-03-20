@@ -11,6 +11,6 @@ annotations:
 dependencies:
   - name: kube-prometheus-stack
     alias: kubePrometheusStack
-    version: 14.0.0
+    version: 15.0.0
     repository: https://giantswarm.github.io/default-catalog/
     condition: kubePrometheusStack.enabled
