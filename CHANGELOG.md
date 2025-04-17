@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.1] - 2025-04-17
 
+### Fixed
+
+- Fix home URL in chart metadata
+
 ### Changed
 
 - Bumped kube-prometheus-stack to v15.0.0
