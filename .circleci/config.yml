@@ -48,20 +48,6 @@ workflows:
                 - main
 
       - architect/push-to-app-collection:
-          name: aws-app-collection
-          context: architect
-          app_name: prometheus-remotewrite
-          app_namespace: monitoring
-          app_collection_repo: aws-app-collection
-          requires:
-            - app-catalog
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-
-      - architect/push-to-app-collection:
           name: vsphere-app-collection
           context: architect
           app_name: prometheus-remotewrite
