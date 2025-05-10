@@ -9,8 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Replace the  `repo` renovate marker with  `registry` on the Prometheus image so renovate can detect the new version.
-- Upgrade Prometheus to 3.3.0
+- Replace the `repo` renovate marker with  `registry` on the Prometheus image so renovate can detect the new version.
+- Upgrade Prometheus to 3.3.0.
+
+### Removed
+
+- Stop pushing the application to vintage clusters.
+- Clean up manifest targetting vintage clusters.
 
 ## [0.8.1] - 2025-04-17
 

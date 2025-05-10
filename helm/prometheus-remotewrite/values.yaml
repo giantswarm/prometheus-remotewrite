@@ -3,7 +3,6 @@ serviceType: managed
 
 remoteWrite:
   mimir:
-    enabled: false
     prometheus:
       priorityClassName: prometheus
       resources:
