@@ -1,4 +1,3 @@
-{{- if .Values.remoteWrite.mimir.enabled }}
 ## This is the grafana cloud secret.
 apiVersion: v1
 kind: Secret
@@ -126,4 +125,3 @@ spec:
   walCompression: true
   web:
     pageTitle: Mimir To Grafana Cloud Prometheus
-{{- end }}
