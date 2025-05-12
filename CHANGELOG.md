@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-05-12
+
 ### Changed
 
 - Replace the `repo` renovate marker with  `registry` on the Prometheus image so renovate can detect the new version.
@@ -143,7 +145,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.8.1...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.8.1...v1.0.0
 [0.8.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.7.1...v0.8.0
 [0.7.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.7.0...v0.7.1
