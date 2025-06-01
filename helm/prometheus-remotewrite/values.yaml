@@ -14,7 +14,7 @@ remoteWrite:
           memory: "1610612736"
       # used by renovate
       # registry: gsoci.azurecr.io/giantswarm/prometheus
-      version: "v3.4.0"
+      version: "v3.4.1"
       vpa:
         maxAllowed:
           cpu: 2
