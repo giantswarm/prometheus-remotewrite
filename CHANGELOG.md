@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `app.kubernetes.io/component` label to align with the other mimir components
+
 ## [1.0.0] - 2025-05-12
 
 ### Changed
