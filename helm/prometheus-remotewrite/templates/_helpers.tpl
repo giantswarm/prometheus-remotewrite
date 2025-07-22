@@ -20,6 +20,7 @@ Common labels
 {{ include "labels.selector" . }}
 app.kubernetes.io/name: {{ .Values.name }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
+app.kubernetes.io/component: remote-write
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
