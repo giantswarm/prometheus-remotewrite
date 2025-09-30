@@ -74,6 +74,10 @@ spec:
       regex: {{ .Values.remoteWrite.grafanaCloud.metricsSelector }}
       sourceLabels:
       - __name__
+  {{- with .Values.remoteWrite.grafanaCloud.externalLabels }}
+  externalLabels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   replicaExternalLabelName: ""
   replicas: 1
   resources:

@@ -22,6 +22,17 @@
                         "apiKey": {
                             "type": "string"
                         },
+                        "externalLabels": {
+                            "type": "object",
+                            "properties": {
+                                "customer": {
+                                    "type": "string"
+                                },
+                                "installation": {
+                                    "type": "string"
+                                }
+                            }
+                        },
                         "insecureSkipVerify": {
                             "type": "boolean"
                         },

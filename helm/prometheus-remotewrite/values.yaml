@@ -31,6 +31,10 @@ remoteWrite:
     apiKey: ""
     insecureSkipVerify: false
     metricsSelector: (^aggregation:.+|prometheus_tsdb_head_series|prometheus_tsdb_head_samples_appended_total)
+    externalLabels:
+      # Add your external labels here
+      installation: ""
+      customer: ""
 
 kubePrometheusStack:
   enabled: false
