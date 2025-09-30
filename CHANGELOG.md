@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2025-09-30
+
 ### Changed
 
 - Add external label support for loki recording rules.
@@ -161,7 +163,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v0.8.1...v1.0.0
