@@ -1,0 +1,21 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: mimir-to-grafana-cloud
+  namespace: mimir
+spec:
+  namespaceSelector:
+    matchNames:
+    - mimir
+  podMetricsEndpoints:
+  - port: "web"
+    relabelings:
+    - action: replace
+      replacement: mimir
+      targetLabel: app
+  selector:
+    matchLabels:
+      prometheus: mimir-to-grafana-cloud

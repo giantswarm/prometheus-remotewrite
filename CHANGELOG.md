@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add tracingConfig to Prometheus if tracing is enabled.
+
+### Changed
+
+- Split up the manifest into smaller ones.
+
 ## [1.3.0] - 2025-09-30
 
 ### Changed
