@@ -1,6 +1,15 @@
 name: prometheus-remotewrite
 serviceType: managed
 
+tracing:
+  enabled: false
+  clientType: grpc
+  endpoint: otlp-gateway.kube-system.svc.cluster.local:4317
+  insecure: true
+  # 1 means we send all traces (no sampling)
+  samplingFraction: 1
+  tenant: "giantswarm"
+
 remoteWrite:
   mimir:
     prometheus:

@@ -130,6 +130,29 @@
         },
         "serviceType": {
             "type": "string"
+        },
+        "tracing": {
+            "type": "object",
+            "properties": {
+                "clientType": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "endpoint": {
+                    "type": "string"
+                },
+                "insecure": {
+                    "type": "boolean"
+                },
+                "samplingFraction": {
+                    "type": "integer"
+                },
+                "tenant": {
+                    "type": "string"
+                }
+            }
         }
     }
 }
