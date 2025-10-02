@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2025-10-02
+
 ### Added
 
 - Add tracingConfig to Prometheus if tracing is enabled.
@@ -171,7 +173,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.0.0...v1.1.0
