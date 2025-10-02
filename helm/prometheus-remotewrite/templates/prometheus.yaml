@@ -14,8 +14,8 @@ spec:
       {{- if .Values.tracing.enabled }}
       observability.giantswarm.io/tenant: {{ .Values.tracing.tenant | quote }}
       {{- end }}
-  {{- if .Values.remoteWrite.mimir.prometheus.priorityClassName }}
-  priorityClassName: {{ .Values.remoteWrite.mimir.prometheus.priorityClassName }}
+  {{- with .Values.remoteWrite.mimir.prometheus.priorityClassName }}
+  priorityClassName: {{ . }}
   {{- end }}
   prometheusExternalLabelName: ""
   remoteRead:
@@ -44,11 +44,9 @@ spec:
       sourceLabels:
       - __name__
   {{- if .Values.tracing.enabled }}
-  tracing:
+  tracingConfig:
     clientType: {{ .Values.tracing.clientType | quote }}
     endpoint: {{ .Values.tracing.endpoint | quote }}
-    headers:
-      "X-Scope-OrgID": {{ .Values.tracing.tenant | quote }}
     insecure: {{ .Values.tracing.insecure }}
     samplingFraction: {{ .Values.tracing.samplingFraction | quote }}
   {{- end }}
