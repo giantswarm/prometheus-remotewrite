@@ -1,3 +1,4 @@
+replace-app-version-with-git: true
 replace-chart-version-with-git: true
 giantswarm-validator-ignored-checks: F0001
 generate-metadata: true
