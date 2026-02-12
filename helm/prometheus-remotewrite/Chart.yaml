@@ -1,10 +1,10 @@
 apiVersion: v2
-appVersion: 0.0.1
+appVersion: 1.4.2
 name: prometheus-remotewrite
 description: Hold remote write configuration for prometheus.
 home: https://github.com/giantswarm/prometheus-remotewrite
 icon: https://s.giantswarm.io/app-icons/prometheus/1/light.svg
-version: 1.4.1
+version: 1.4.2
 annotations:
   io.giantswarm.application.team: "atlas"
 dependencies:
