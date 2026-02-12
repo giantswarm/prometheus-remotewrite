@@ -1,6 +1,6 @@
 dependencies:
 - name: kube-prometheus-stack
   repository: https://giantswarm.github.io/default-catalog/
-  version: 19.0.1
-digest: sha256:c151c7f50ab35627739c82e763822ce577d3f46bef47745784cc738f5bf17a97
-generated: "2025-12-29T18:11:21.906420028Z"
+  version: 19.0.2
+digest: sha256:7694be9e5702c78c50f069bec0ec99339edf868093e4ad260c23612199413af3
+generated: "2026-02-12T15:19:43.796994902Z"
