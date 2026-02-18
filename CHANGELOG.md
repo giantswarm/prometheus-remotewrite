@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.4] - 2026-02-18
+
 ### Fixed
 
 - Remove duplicate common labels `app.kubernetes.io/name` and `app.kubernetes.io/instance` from templates.
@@ -195,7 +197,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `grafana-cloud` remote write configuration.
   Hold configuration for Grafana Cloud remote write endpoint configured at https://grafana.com
 
-[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.3...HEAD
+[Unreleased]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.4...HEAD
+[1.4.4]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.3...v1.4.4
 [1.4.3]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/giantswarm/prometheus-remotewrite/compare/v1.4.0...v1.4.1
