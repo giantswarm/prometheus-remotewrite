@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Remove duplicate common labels `app.kubernetes.io/name` and `app.kubernetes.io/instance` from templates.
+
 ## [1.4.3] - 2026-02-18
 
 ### Changed
