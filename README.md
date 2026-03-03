@@ -6,9 +6,7 @@ This application provides a way to configure all Giant Swarm Prometheus servers 
 
 ## Installing
 
-This application is only meant to be installed on management clusters. This is achieved via our usual `opsctl deploy` tooling command.
-
-See details : https://intranet.giantswarm.io/docs/dev-and-releng/how-to-deploy-to-a-management-cluster/#deploying-a-unique-app
+This application is only meant to be installed on management clusters, via catalogs.
 
 ## Configuring
 
@@ -37,7 +35,7 @@ See the [full reference on how to configure apps](https://docs.giantswarm.io/app
 
 When Mimir is enabled as an observability component in the management cluster, we need to deploy resources like RemoteWrite, Prometheus in order to send data to `Grafana Cloud`.
 
-- Mimir RemoteWrite to send data from Prometheis (MC+WCs) to Mimir
+- Mimir RemoteWrite to send data from Prometheis (MC+WCs) to Mimir:
 - Prometheus (mimir-to-grafana-cloud) to send data from Mimir to Grafana-Cloud
 
 Below, a graph explaining the architecture:
